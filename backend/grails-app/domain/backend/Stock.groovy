@@ -8,7 +8,7 @@ class Stock {
     static belongsTo = [company:Company]
 
     static constraints = {
-        price: nullable: false, blank:false;
-        priceDate: nullable: false, blank: false;
+        price nullable: false, blank:false;
+        priceDate nullable: false, blank: false;
     }
 }

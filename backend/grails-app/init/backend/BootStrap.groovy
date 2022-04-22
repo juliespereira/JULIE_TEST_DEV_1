@@ -1,5 +1,12 @@
 package backend
 
+import java.sql.Timestamp
+import java.time.LocalDate
+import java.time.chrono.ChronoLocalDate
+import java.time.chrono.Chronology
+import java.time.chrono.IsoChronology
+import java.time.temporal.ChronoUnit
+
 class BootStrap {
 
     def init = { servletContext ->
@@ -8,50 +15,50 @@ class BootStrap {
         def mcDonalds = new Company (name: 'McDonalds', segment: 'Food').save()
 
         //Tempo em milissegundos do momento da execução do sistema
-        Timestamp tsAtual = new Timestamp(System.currentTimeMillis())
+        Timestamp tsNow = new Timestamp(System.currentTimeMillis())
 
-        Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(tsAtual.getTime())
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(tsNow.getTime())
 
-        cl.set(Calendar.DATE, tsAtual.getDay() - 31)
+        calendar.set(Calendar.DATE, tsNow.getDay() - 31)
 
-        Timestamp tsInicial = new Timestamp(System.currentTimeMillis())
-        tsInicial.setTime(cl.getTimeInMillis())
+        Timestamp tsActual = new Timestamp(System.currentTimeMillis())
+        tsActual.setTime(calendar.getTimeInMillis())
 
-        tsInicial.setHours(10)
-        tsInicial.setMinutes(0)
+        tsActual.setHours(10)
+        tsActual.setMinutes(0)
 
-        Random rn = new Random()
+        Random random = new Random()
 
         for(int i = 30; i > 0; i--){
 
-            while (tsInicial.getHours() < 18) {
+            while (tsActual.getHours() < 18) {
 
-                int rand = rn.nextInt(range) + min
-                int rand1 = rn.nextInt(range) + min
-                int rand2 = rn.nextInt(range) + min
+                int rand = random.nextInt(range) + min
+                int rand1 = random.nextInt(range) + min
+                int rand2 = random.nextInt(range) + min
 
-                Stock stock = new Stock(price: rand, priceDate: tsInicial)
+                Stock stock = new Stock(price: rand, priceDate: tsActual)
                 stock.comp = microsoft
                 stock.save(failOnError: true)
-                Stock stock1 = new Stock(price: rand1, priceDate: tsInicial)
+                Stock stock1 = new Stock(price: rand1, priceDate: tsActual)
                 stock1.comp = tesla;
                 stock1.save(failOnError: true)
-                Stock stock2 = new Stock(price: rand2, priceDate: tsInicial)
+                Stock stock2 = new Stock(price: rand2, priceDate: tsActual)
                 stock2.comp = mcDonalds
                 stock2.save(failOnError: true)
 
-                tsInicial.setMinutes(tsInicial.getMinutes() + 1)
+                tsActual.setMinutes(tsActual.getMinutes() + 1)
 
             }
 
-            cl.setTimeInMillis(tsAtual.getTime())
-            cl.set(Calendar.DATE, tsAtual.getDay() - i)
+            calendar.setTimeInMillis(tsNow.getTime())
+            calendar.set(Calendar.DATE, tsNow.getDay() - i)
 
-            tsInicial.setTime(cl.getTimeInMillis())
+            tsActual.setTime(calendar.getTimeInMillis())
 
-            tsInicial.setHours(10)
-            tsInicial.setMinutes(0)
+            tsActual.setHours(10)
+            tsActual.setMinutes(0)
 
         }
 

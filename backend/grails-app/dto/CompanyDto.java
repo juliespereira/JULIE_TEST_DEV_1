@@ -1,3 +1,5 @@
+package backend;
+
 public class CompanyDto {
     String name;
     String segment;
@@ -25,11 +27,11 @@ public class CompanyDto {
         this.segment = segment;
     }
 
-    public String getStandardDeviation(){
+    public double getStandardDeviation(){
         return standardDeviation;
     }
 
-    public void setStandardDeviation(String standardDeviation){
+    public void setStandardDeviation(double standardDeviation){
         this.standardDeviation = standardDeviation;
     }
 
