@@ -1,0 +1,26 @@
+
+  <div class="container">
+    <h3 class="text-center">Visualização das Empresas</h3>
+    <div class="row">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Empresa</th>
+            <th scope="col">Segmento</th>
+            <th scope="col">Desvio Padrão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor= "let company of companies">
+            <td>{{company.name}}</td>
+            <td>{{company.segment}}</td>
+            <td>{{company.standardDeviation}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="button" (click)="loadCompanies()">Buscar Empresas</button>
+    </div>
+  </div>
+
+

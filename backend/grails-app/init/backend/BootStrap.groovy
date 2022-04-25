@@ -20,7 +20,7 @@ class BootStrap {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(tsNow.getTime())
 
-        calendar.set(Calendar.DATE, tsNow.getDay() - 31)
+        calendar.set(Calendar.DATE, tsNow.getDay())
 
         Timestamp tsActual = new Timestamp(System.currentTimeMillis())
         tsActual.setTime(calendar.getTimeInMillis())
@@ -34,18 +34,18 @@ class BootStrap {
 
             while (tsActual.getHours() < 18) {
 
-                int rand = random.nextInt(range) + min
-                int rand1 = random.nextInt(range) + min
-                int rand2 = random.nextInt(range) + min
+                int rand = random.nextInt(10) + 1
+                int rand1 = random.nextInt(10) + 1
+                int rand2 = random.nextInt(10) + 1
 
                 Stock stock = new Stock(price: rand, priceDate: tsActual)
-                stock.comp = microsoft
+                stock.company = microsoft
                 stock.save(failOnError: true)
                 Stock stock1 = new Stock(price: rand1, priceDate: tsActual)
-                stock1.comp = tesla;
+                stock1.company = tesla;
                 stock1.save(failOnError: true)
                 Stock stock2 = new Stock(price: rand2, priceDate: tsActual)
-                stock2.comp = mcDonalds
+                stock2.company = mcDonalds
                 stock2.save(failOnError: true)
 
                 tsActual.setMinutes(tsActual.getMinutes() + 1)
